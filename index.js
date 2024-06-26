@@ -1,8 +1,14 @@
 const express= require('express');
+const path= require('path');
+require('dotenv').config();
 const server= express();
 const mongoose= require('mongoose');
 const todoRouter=  require('./routes/todo');
 
+const connectURL= process.env.MONGO_URL;
+
+
+server.use(express.static(process.env.PUBLIC_DIR))
 server.use(express.json());
 
 server.all('*', function(req, res, next) {
@@ -18,7 +24,8 @@ server.all('*', function(req, res, next) {
 main().catch(err => console.log(err));
 
 async function main() {
-   await mongoose.connect('mongodb+srv://akshatsingh52002:Akshat123%40@cluster0.ewizvfm.mongodb.net/todoappdatabase?retryWrites=true&w=majority&appName=Cluster0');
+  //  await mongoose.connect('mongodb+srv://akshatsingh52002:Akshat123%40@cluster0.ewizvfm.mongodb.net/todoappdatabase?retryWrites=true&w=majority&appName=Cluster0');
+  await mongoose.connect(connectURL);
 
 }
 
