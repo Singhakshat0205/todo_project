@@ -4,10 +4,9 @@ require('dotenv').config();
 const server= express();
 const mongoose= require('mongoose');
 const todoRouter=  require('./routes/todo');
+const port= process.env.PORT;
 
 const connectURL= process.env.MONGO_URL;
-
-
 server.use(express.static(process.env.PUBLIC_DIR))
 server.use(express.json());
 
@@ -21,6 +20,8 @@ server.all('*', function(req, res, next) {
       next();
     }
   });
+
+  
 main().catch(err => console.log(err));
 
 async function main() {
@@ -34,4 +35,4 @@ server.use('/todos', todoRouter.router);
 
 
 
-server.listen(8080);
+server.listen(port);
