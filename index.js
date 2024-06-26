@@ -12,13 +12,6 @@ const connectURL= process.env.MONGO_URL;
 server.use(express.static(process.env.PUBLIC_DIR))
 server.use(express.json());
 
-server.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://todo-project-ruddy-seven.vercel.app');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  next();
-});
-
-
 
 server.all('*', function(req, res, next) {
     res.header('Access-Control-Allow-Origin', 'URLs to trust of allow');
