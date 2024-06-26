@@ -12,6 +12,33 @@ const connectURL= process.env.MONGO_URL;
 server.use(express.static(process.env.PUBLIC_DIR))
 server.use(express.json());
 
+server.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'https://todo-project-ruddy-seven.vercel.app');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
+
+const allowedOrigins = ['https://todo-project-ruddy-seven.vercel.app', 'https://another-allowed-origin.com'];
+
+server.use((req, res, next) => {
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', origin);
+  }
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
+
+
+const corsOptions = {
+  origin: ['https://todo-project-ruddy-seven.vercel.app', 'https://another-allowed-origin.com'],
+  optionsSuccessStatus: 200 // Some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+
+server.use(cors(corsOptions));
+
+
+
 server.all('*', function(req, res, next) {
     res.header('Access-Control-Allow-Origin', 'URLs to trust of allow');
     res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
