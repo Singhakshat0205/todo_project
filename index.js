@@ -2,9 +2,11 @@ const express= require('express');
 const path= require('path');
 require('dotenv').config();
 const server= express();
+const cors= require('cors');
 const mongoose= require('mongoose');
 const todoRouter=  require('./routes/todo');
 const port= process.env.PORT;
+server.use(cors());
 
 const connectURL= process.env.MONGO_URL;
 server.use(express.static(process.env.PUBLIC_DIR))
