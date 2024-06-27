@@ -1,7 +1,5 @@
 { 
-
-
-    
+ 
     "builds": [
       {
         "src": "index.js",
@@ -12,6 +10,8 @@
         "use": "@vercel/static"
       }
     ],
+
+    
     "routes": [
       {
        
